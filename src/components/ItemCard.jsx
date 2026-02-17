@@ -2,13 +2,13 @@ import { useOutletContext } from "react-router-dom";
 import AddToCartBTN from "./AddToCartBTN";
 
 export default function ItemCard() {
-  const item = useOutletContext();
+  const { products, cartNumber, setCartNumber } = useOutletContext();
 
   return (
     <>
-      {item.map((product) => (
-        <div className="shadow-md p-3">
-          <a key={product.id} className="group">
+      {products.map((product) => (
+        <div key={product.id} className="shadow-md p-3">
+          <a className="group">
             <img
               alt={"test Pic"}
               src={product.image}
@@ -21,7 +21,10 @@ export default function ItemCard() {
               ${product.price}
             </p>
             {/* buttons */}
-            <AddToCartBTN />
+            <AddToCartBTN
+              cartNumber={cartNumber}
+              setCartNumber={setCartNumber}
+            />
           </a>
         </div>
       ))}

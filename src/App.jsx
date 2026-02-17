@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function App() {
   const [products, setProducts] = useState();
+  const [cartNumber, setCartNumber] = useState(0);
 
   useEffect(() => {
     async function test() {
@@ -17,12 +18,12 @@ export default function App() {
   }, []);
 
   return (
-    <ItemsContext.Provider value={{ products, setProducts }}>
+    <ItemsContext.Provider value={{ products, setProducts, cartNumber }}>
       <nav>
         <Navbar />
       </nav>
       <main>
-        <Outlet />
+        <Outlet context={{ cartNumber, setCartNumber }} />
       </main>
     </ItemsContext.Provider>
   );
