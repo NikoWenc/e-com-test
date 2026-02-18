@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router-dom";
 import AddToCartBTN from "./AddToCartBTN";
 
 export default function ItemCard() {
-  const { products, cart } = useOutletContext();
+  const { products } = useOutletContext();
 
   return (
     <>
@@ -21,7 +21,7 @@ export default function ItemCard() {
               ${product.price}
             </p>
             {/* buttons */}
-            <AddToCartBTN cart={cart} />
+            <AddToCartBTN productId={product.id} />
           </a>
         </div>
       ))}
