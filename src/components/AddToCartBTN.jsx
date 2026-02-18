@@ -4,6 +4,7 @@ export default function AddToCartBTN({ productId }) {
   const [addToCartButtonState, setAddToCartButtonState] = useState(() => {
     const getCart = localStorage.getItem("cart");
     const savedCart = JSON.parse(getCart);
+
     if (savedCart.items) {
       const initialValue = savedCart.items.find(
         (items) => items.id == productId,
@@ -15,6 +16,7 @@ export default function AddToCartBTN({ productId }) {
   const [quantityCounter, setQuantityCounter] = useState(() => {
     const getCart = localStorage.getItem("cart");
     const savedCart = JSON.parse(getCart);
+
     if (savedCart.items) {
       const initialValue = savedCart.items.find(
         (items) => items.id == productId,
@@ -26,35 +28,45 @@ export default function AddToCartBTN({ productId }) {
   function updateCart(operator) {
     const getCart = localStorage.getItem("cart");
     const savedCart = JSON.parse(getCart);
+
     savedCart.cartNumber = savedCart.cartNumber + operator;
+
     savedCart.items.map((items) => {
       if (items.id === productId) setQuantityCounter(items.quantityAdded);
     });
+
     return localStorage.setItem("cart", JSON.stringify(savedCart));
   }
 
+  // add to cart button
   function addItemToCart() {
     const getCart = localStorage.getItem("cart");
     const savedCart = JSON.parse(getCart);
+
     setAddToCartButtonState(true);
+
     savedCart.items.push({
       id: productId,
       addedToCart: true,
       quantityAdded: 1,
     });
+
     return localStorage.setItem("cart", JSON.stringify(savedCart));
   }
 
+  // for the + / - quantity button
   function changeQuantity(operator) {
     const getCart = localStorage.getItem("cart");
     const savedCart = JSON.parse(getCart);
 
+    // update quantity property
     savedCart.items.map((items) => {
       if (items.id == productId) {
         items.quantityAdded = items.quantityAdded + operator;
       }
     });
 
+    // update the cart items array
     const updatedItemList = savedCart.items.filter((items) => {
       if (items.id === productId && items.quantityAdded <= 0) {
         items.addedToCart = false;
@@ -64,6 +76,7 @@ export default function AddToCartBTN({ productId }) {
       return true;
     });
 
+    // save new array for saving to storage
     savedCart.items = updatedItemList;
 
     return localStorage.setItem("cart", JSON.stringify(savedCart));
