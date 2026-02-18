@@ -4,6 +4,7 @@ import Home from "../Pages/Home";
 import Shop from "../Pages/Shop";
 import Cart from "../Pages/Cart";
 import ItemCard from "../components/ItemCard";
+import AddToCartBTN from "../components/AddToCartBTN";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,9 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        element: <AddToCartBTN />,
       },
     ],
   },
