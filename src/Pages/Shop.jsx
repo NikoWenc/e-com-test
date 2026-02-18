@@ -1,11 +1,10 @@
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { ItemsContext } from "../context/ItemsContext";
 import LoadingPage from "../components/LoadingPage";
 
 export default function Shop() {
-  const { products } = useContext(ItemsContext);
-  const { cartNumber, setCartNumber } = useOutletContext();
+  const { products, cart } = useContext(ItemsContext);
 
   let loading = true;
   products ? (loading = false) : (loading = true);
@@ -20,7 +19,7 @@ export default function Shop() {
             <h2 className="sr-only">Productsss</h2>
             {/* for searching */}
             <div className="grid grid-cols-1 gap-x-6 gap-y-15 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-              <Outlet context={{ products, cartNumber, setCartNumber }} />
+              <Outlet context={{ products, cart }} />
             </div>
           </div>
         </div>
