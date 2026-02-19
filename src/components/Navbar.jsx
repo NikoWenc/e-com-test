@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { ItemsContext } from "../context/ItemsContext";
 
 export default function Navbar() {
-  const { cartNumber } = useContext(ItemsContext);
-  const cartNumberStyle = cartNumber <= 0 ? "sr-only" : "p-5 rounded-full";
+  const { cart } = useContext(ItemsContext);
+  const cartNumberStyle = cart.cartNumber <= 0 ? "sr-only" : "p-5 rounded-full";
 
   return (
     <div className="flex py-5 px-30 bg-gray-500 w-screen h-20 fixed">
@@ -20,7 +20,7 @@ export default function Navbar() {
         </Link>
         <Link to="cart">
           <button className="text-2xl hover:text-yellow-500">
-            Cart <span className={cartNumberStyle}>{cartNumber}</span>
+            Cart <span className={cartNumberStyle}>{cart.cartNumber}</span>
           </button>
         </Link>
       </div>

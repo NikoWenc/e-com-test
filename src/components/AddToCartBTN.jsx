@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ItemsContext } from "../context/ItemsContext";
 
 export default function AddToCartBTN({ productId }) {
+  // add to cart button state
   const [addToCartButtonState, setAddToCartButtonState] = useState(() => {
     const getCart = localStorage.getItem("cart");
     const savedCart = JSON.parse(getCart);
@@ -13,6 +15,7 @@ export default function AddToCartBTN({ productId }) {
     }
   });
 
+  // item quantity count
   const [quantityCounter, setQuantityCounter] = useState(() => {
     const getCart = localStorage.getItem("cart");
     const savedCart = JSON.parse(getCart);
@@ -25,17 +28,29 @@ export default function AddToCartBTN({ productId }) {
     }
   });
 
+  const { setCart } = useContext(ItemsContext);
+
+  // cart update
   function updateCart(operator) {
-    const getCart = localStorage.getItem("cart");
-    const savedCart = JSON.parse(getCart);
+    setCart((prev) => {
+      const newCount = prev.cartNumber + operator;
 
-    savedCart.cartNumber = savedCart.cartNumber + operator;
+      const getCart = localStorage.getItem("cart");
+      const savedCart = JSON.parse(getCart);
 
-    savedCart.items.map((items) => {
-      if (items.id === productId) setQuantityCounter(items.quantityAdded);
+      savedCart.items.map((items) => {
+        if (items.id === productId) setQuantityCounter(items.quantityAdded);
+      });
+
+      savedCart.cartNumber = newCount;
+      localStorage.setItem("cart", JSON.stringify(savedCart));
+
+      return {
+        ...prev,
+        items: savedCart.items,
+        cartNumber: newCount,
+      };
     });
-
-    return localStorage.setItem("cart", JSON.stringify(savedCart));
   }
 
   // add to cart button
