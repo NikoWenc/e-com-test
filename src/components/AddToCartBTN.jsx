@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { ItemsContext } from "../context/ItemsContext";
 
-export default function AddToCartBTN({ productId }) {
+export default function AddToCartBTN({ product }) {
   // add to cart button state
   const [addToCartButtonState, setAddToCartButtonState] = useState(() => {
     const getCart = localStorage.getItem("cart");
@@ -9,7 +9,7 @@ export default function AddToCartBTN({ productId }) {
 
     if (savedCart.items) {
       const initialValue = savedCart.items.find(
-        (items) => items.id == productId,
+        (items) => items.id == product.id,
       );
       return initialValue?.addedToCart || false;
     }
@@ -22,7 +22,7 @@ export default function AddToCartBTN({ productId }) {
 
     if (savedCart.items) {
       const initialValue = savedCart.items.find(
-        (items) => items.id == productId,
+        (items) => items.id == product.id,
       );
       return initialValue?.quantityAdded || 0;
     }
@@ -39,7 +39,7 @@ export default function AddToCartBTN({ productId }) {
       const savedCart = JSON.parse(getCart);
 
       savedCart.items.map((items) => {
-        if (items.id === productId) setQuantityCounter(items.quantityAdded);
+        if (items.id === product.id) setQuantityCounter(items.quantityAdded);
       });
 
       savedCart.cartNumber = newCount;
@@ -61,7 +61,7 @@ export default function AddToCartBTN({ productId }) {
     setAddToCartButtonState(true);
 
     savedCart.items.push({
-      id: productId,
+      ...product,
       addedToCart: true,
       quantityAdded: 1,
     });
@@ -76,14 +76,14 @@ export default function AddToCartBTN({ productId }) {
 
     // update quantity property
     savedCart.items.map((items) => {
-      if (items.id == productId) {
+      if (items.id == product.id) {
         items.quantityAdded = items.quantityAdded + operator;
       }
     });
 
     // update the cart items array
     const updatedItemList = savedCart.items.filter((items) => {
-      if (items.id === productId && items.quantityAdded <= 0) {
+      if (items.id === product.id && items.quantityAdded <= 0) {
         items.addedToCart = false;
         setAddToCartButtonState(false);
         return false;

@@ -21,7 +21,7 @@ export default function ItemCard() {
               ${product.price}
             </p>
             {/* buttons */}
-            <AddToCartBTN productId={product.id} />
+            <AddToCartBTN product={product} />
           </a>
         </div>
       ))}
