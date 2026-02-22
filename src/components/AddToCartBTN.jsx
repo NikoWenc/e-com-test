@@ -30,6 +30,34 @@ export default function AddToCartBTN({ product }) {
 
   const { setCart } = useContext(ItemsContext);
 
+  // for the + / - quantity button
+  function changeQuantity(operator) {
+    const getCart = localStorage.getItem("cart");
+    const savedCart = JSON.parse(getCart);
+
+    // update quantity property
+    savedCart.items.map((items) => {
+      if (items.id == product.id) {
+        items.quantityAdded = items.quantityAdded + operator;
+      }
+    });
+
+    // update the cart items array
+    const updatedItemList = savedCart.items.filter((items) => {
+      if (items.id === product.id && items.quantityAdded <= 0) {
+        items.addedToCart = false;
+        setAddToCartButtonState(false);
+        return false;
+      }
+      return true;
+    });
+
+    // save new array for saving to storage
+    savedCart.items = updatedItemList;
+
+    return localStorage.setItem("cart", JSON.stringify(savedCart));
+  }
+
   // cart update
   function updateCart(operator) {
     setCart((prev) => {
@@ -66,41 +94,13 @@ export default function AddToCartBTN({ product }) {
       quantityAdded: 1,
     });
 
-    return localStorage.setItem("cart", JSON.stringify(savedCart));
-  }
-
-  // for the + / - quantity button
-  function changeQuantity(operator) {
-    const getCart = localStorage.getItem("cart");
-    const savedCart = JSON.parse(getCart);
-
-    // update quantity property
-    savedCart.items.map((items) => {
-      if (items.id == product.id) {
-        items.quantityAdded = items.quantityAdded + operator;
-      }
-    });
-
-    // update the cart items array
-    const updatedItemList = savedCart.items.filter((items) => {
-      if (items.id === product.id && items.quantityAdded <= 0) {
-        items.addedToCart = false;
-        setAddToCartButtonState(false);
-        return false;
-      }
-      return true;
-    });
-
-    // save new array for saving to storage
-    savedCart.items = updatedItemList;
-
-    return localStorage.setItem("cart", JSON.stringify(savedCart));
+    localStorage.setItem("cart", JSON.stringify(savedCart));
   }
 
   return (
     <>
       {addToCartButtonState ? (
-        <div className="flex justify-center items-center gap-10 mt-5">
+        <div className="flex justify-center items-center gap-5 mt-5">
           <button
             onClick={() => {
               changeQuantity(-1);
