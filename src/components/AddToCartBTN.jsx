@@ -1,58 +1,34 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ItemsContext } from "../context/ItemsContext";
 
-export default function AddToCartBTN({ productId }) {
+export default function AddToCartBTN({ product }) {
+  // add to cart button state
   const [addToCartButtonState, setAddToCartButtonState] = useState(() => {
     const getCart = localStorage.getItem("cart");
     const savedCart = JSON.parse(getCart);
 
     if (savedCart.items) {
       const initialValue = savedCart.items.find(
-        (items) => items.id == productId,
+        (items) => items.id == product.id,
       );
       return initialValue?.addedToCart || false;
     }
   });
 
+  // item quantity count
   const [quantityCounter, setQuantityCounter] = useState(() => {
     const getCart = localStorage.getItem("cart");
     const savedCart = JSON.parse(getCart);
 
     if (savedCart.items) {
       const initialValue = savedCart.items.find(
-        (items) => items.id == productId,
+        (items) => items.id == product.id,
       );
       return initialValue?.quantityAdded || 0;
     }
   });
 
-  function updateCart(operator) {
-    const getCart = localStorage.getItem("cart");
-    const savedCart = JSON.parse(getCart);
-
-    savedCart.cartNumber = savedCart.cartNumber + operator;
-
-    savedCart.items.map((items) => {
-      if (items.id === productId) setQuantityCounter(items.quantityAdded);
-    });
-
-    return localStorage.setItem("cart", JSON.stringify(savedCart));
-  }
-
-  // add to cart button
-  function addItemToCart() {
-    const getCart = localStorage.getItem("cart");
-    const savedCart = JSON.parse(getCart);
-
-    setAddToCartButtonState(true);
-
-    savedCart.items.push({
-      id: productId,
-      addedToCart: true,
-      quantityAdded: 1,
-    });
-
-    return localStorage.setItem("cart", JSON.stringify(savedCart));
-  }
+  const { setCart } = useContext(ItemsContext);
 
   // for the + / - quantity button
   function changeQuantity(operator) {
@@ -61,14 +37,14 @@ export default function AddToCartBTN({ productId }) {
 
     // update quantity property
     savedCart.items.map((items) => {
-      if (items.id == productId) {
+      if (items.id == product.id) {
         items.quantityAdded = items.quantityAdded + operator;
       }
     });
 
     // update the cart items array
     const updatedItemList = savedCart.items.filter((items) => {
-      if (items.id === productId && items.quantityAdded <= 0) {
+      if (items.id === product.id && items.quantityAdded <= 0) {
         items.addedToCart = false;
         setAddToCartButtonState(false);
         return false;
@@ -82,10 +58,49 @@ export default function AddToCartBTN({ productId }) {
     return localStorage.setItem("cart", JSON.stringify(savedCart));
   }
 
+  // cart update
+  function updateCart(operator) {
+    setCart((prev) => {
+      const newCount = prev.cartNumber + operator;
+
+      const getCart = localStorage.getItem("cart");
+      const savedCart = JSON.parse(getCart);
+
+      savedCart.items.map((items) => {
+        if (items.id === product.id) setQuantityCounter(items.quantityAdded);
+      });
+
+      savedCart.cartNumber = newCount;
+      localStorage.setItem("cart", JSON.stringify(savedCart));
+
+      return {
+        ...prev,
+        items: savedCart.items,
+        cartNumber: newCount,
+      };
+    });
+  }
+
+  // add to cart button
+  function addItemToCart() {
+    const getCart = localStorage.getItem("cart");
+    const savedCart = JSON.parse(getCart);
+
+    setAddToCartButtonState(true);
+
+    savedCart.items.push({
+      ...product,
+      addedToCart: true,
+      quantityAdded: 1,
+    });
+
+    localStorage.setItem("cart", JSON.stringify(savedCart));
+  }
+
   return (
     <>
       {addToCartButtonState ? (
-        <div className="flex justify-center items-center gap-10 mt-5">
+        <div className="flex justify-center items-center gap-5 mt-5">
           <button
             onClick={() => {
               changeQuantity(-1);

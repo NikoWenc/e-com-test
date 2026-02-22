@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function App() {
   const [products, setProducts] = useState();
-  const [cart] = useState(() => {
+  const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem("cart");
     const initialValue = JSON.parse(saved);
     return (
@@ -37,9 +37,8 @@ export default function App() {
       value={{
         products,
         setProducts,
-        // cartNumber,
-        // setCartNumber,
         cart,
+        setCart,
       }}
     >
       <nav>
