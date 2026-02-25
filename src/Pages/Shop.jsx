@@ -6,29 +6,46 @@ import SideFilter from "../components/SideFilter";
 
 export default function Shop() {
   const { products, cart } = useContext(ItemsContext);
-  const [activeCategory, setActiveCategory] = useState([]);
+  const [activeCategory, setActiveCategory] = useState({
+    products: [],
+    prices: [],
+  });
 
-  let loading = true;
-  products ? (loading = false) : (loading = true);
+  const hasProductFilters = activeCategory.products.length > 0;
+  const hasPriceFilters = activeCategory.prices.length > 0;
 
   const displayProducts =
-    activeCategory.length === 0
+    !hasProductFilters && !hasPriceFilters
       ? products
-      : products.filter((item) => activeCategory.includes(item.category));
+      : products.filter((item) => {
+          // Match product category if any are selected
+          const matchesCategory = hasProductFilters
+            ? activeCategory.products.includes(item.category)
+            : true;
 
-  function filterClick(category) {
+          // Match price if any are selected
+          const matchesPrice = hasPriceFilters
+            ? activeCategory.prices.some((maxPrice) => item.price <= maxPrice)
+            : true;
+
+          return matchesCategory && matchesPrice;
+        });
+
+  function filterClick(category, type) {
     setActiveCategory((prev) => {
-      if (prev.includes(category)) {
-        return prev.filter((item) => item !== category);
-      } else {
-        return [...prev, category];
-      }
+      const isPresent = prev[type].includes(category);
+      return {
+        ...prev,
+        [type]: isPresent
+          ? prev[type].filter((i) => i !== category)
+          : [...prev[type], category],
+      };
     });
   }
 
   return (
     <>
-      {loading ? (
+      {!products ? (
         <LoadingPage />
       ) : (
         <div className="bg-white flex">

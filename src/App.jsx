@@ -24,6 +24,7 @@ export default function App() {
       const req = await FetchShopItems();
       const res = await req.json();
       setProducts(res);
+      console.log(res);
     }
     test();
 
