@@ -6,6 +6,7 @@ import Cart from "../Pages/Cart";
 import ItemCard from "../components/ItemCard";
 import AddToCartBTN from "../components/AddToCartBTN";
 import CartItems from "../components/CartItems";
+import SideFilter from "../components/SideFilter";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,9 @@ const router = createBrowserRouter([
             element: <CartItems />,
           },
         ],
+      },
+      {
+        element: <SideFilter />,
       },
     ],
   },

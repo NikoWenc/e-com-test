@@ -18,13 +18,16 @@ export default function App() {
   });
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function test() {
       const req = await FetchShopItems();
       const res = await req.json();
       setProducts(res);
-      console.log(res);
     }
     test();
+
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
