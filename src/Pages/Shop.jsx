@@ -51,7 +51,7 @@ export default function Shop() {
         <div className="bg-white">
           <div className="flex flex-col lg:flex-row mx-auto max-w-2xl px-4 py-25 sm:px-6 sm:py-30 lg:max-w-7xl lg:px-8">
             <h2 className="sr-only">Productsss</h2>
-            <div className="w-full lg:w-64 lg:flex-shrink-0 mb-8 lg:mb-0">
+            <div className="w-full lg:w-64 lg:shrink-0 mb-8 lg:mb-0">
               <SideFilter
                 onClick={filterClick}
                 activeCategory={activeCategory}
