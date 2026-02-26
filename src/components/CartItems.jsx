@@ -2,33 +2,47 @@ import { useOutletContext } from "react-router-dom";
 import { ItemsContext } from "../context/ItemsContext";
 import AddToCartBTN from "./AddToCartBTN";
 
-export default function Cart() {
+export default function CartItems() {
   const { cart } = useOutletContext(ItemsContext);
 
   return (
-    <>
+    <div className="space-y-6">
       {cart.items.map((product) => (
         <div
           key={product.id}
-          className="flex w-full gap-5 items-center shadow-md px-10 py-5"
+          className="flex flex-col sm:flex-row w-full gap-6 items-center shadow-sm border border-gray-100 rounded-xl p-4 sm:p-6 bg-white transition-shadow hover:shadow-md"
         >
-          <div className="flex items-center justify-center flex-1">
+          {/* Product Image */}
+          <div className="flex items-center justify-center w-32 h-32 sm:w-40 sm:h-40 shrink-0 bg-gray-50 rounded-lg p-2">
             <img
-              className="w-20 h-25"
+              className="max-w-full max-h-full object-contain"
               src={product.image}
-              alt="product image"
+              alt={product.title}
             />
           </div>
-          <div className="flex-4">
-            <h1 className="text-3xl">{product.title}</h1>
-            <p className="text-[16px] mt-2">{product.description}</p>
-            <p className="pt-10 text-2xl">${product.price}</p>
+
+          {/* Product Info */}
+          <div className="grow text-center sm:text-left">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 line-clamp-2">
+              {product.title}
+            </h2>
+            <p className="text-gray-500 mt-2 text-sm sm:text-base line-clamp-3">
+              {product.description}
+            </p>
+            <p className="mt-4 text-2xl font-bold text-gray-900">
+              ${product.price}
+            </p>
           </div>
-          <div className="flex flex-1 flex-col items-center justify-center gap-3">
+
+          {/* Quantity Controls */}
+          <div className="flex flex-col items-center justify-center gap-4 bg-gray-50 p-4 rounded-xl w-full sm:w-auto min-w-35">
+            <span className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+              Quantity
+            </span>
             <AddToCartBTN product={product} />
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
