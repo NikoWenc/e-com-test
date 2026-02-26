@@ -1,4 +1,4 @@
-export default function SideFilterList({
+export default function SideFilterItem({
   name,
   onClick,
   activeCategory,

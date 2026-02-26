@@ -100,7 +100,7 @@ export default function AddToCartBTN({ product }) {
   return (
     <>
       {addToCartButtonState ? (
-        <div className="flex justify-center items-center gap-5 mt-5">
+        <div className="flex justify-center items-center gap-5 mt-2">
           <button
             onClick={() => {
               changeQuantity(-1);
@@ -125,7 +125,7 @@ export default function AddToCartBTN({ product }) {
         </div>
       ) : (
         <button
-          className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg transition-colors duration-200 shadow-md active:scale-95 text-1xl mt-5"
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg transition-colors duration-200 shadow-md active:scale-95 text-1xl mt-2"
           onClick={() => {
             addItemToCart();
             updateCart(1);

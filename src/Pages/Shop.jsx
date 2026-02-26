@@ -25,7 +25,11 @@ export default function Shop() {
 
           // Match price if any are selected
           const matchesPrice = hasPriceFilters
-            ? activeCategory.prices.some((maxPrice) => item.price <= maxPrice)
+            ? activeCategory.prices.some((maxPrice) =>
+                maxPrice > 500
+                  ? item.price >= maxPrice
+                  : item.price <= maxPrice,
+              )
             : true;
 
           return matchesCategory && matchesPrice;
