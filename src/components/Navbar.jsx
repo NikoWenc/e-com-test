@@ -12,7 +12,9 @@ export default function Navbar() {
   return (
     <div className="flex py-5 px-30 bg-gray-500 w-screen h-20 fixed">
       <div className="grow">
-        <h1 className="text-3xl">👕</h1>
+        <Link to="/">
+          <h1 className="text-3xl">-👕-</h1>
+        </Link>
       </div>
       <div className="grow flex items-center justify-end gap-10">
         <Link to="/">

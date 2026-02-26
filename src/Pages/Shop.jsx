@@ -48,17 +48,17 @@ export default function Shop() {
       {!products ? (
         <LoadingPage />
       ) : (
-        <div className="bg-white flex">
-          <div className="flex mx-auto max-w-2xl px-4 py-25 sm:px-6 sm:py-30 lg:max-w-7xl lg:px-8">
+        <div className="bg-white">
+          <div className="flex flex-col lg:flex-row mx-auto max-w-2xl px-4 py-25 sm:px-6 sm:py-30 lg:max-w-7xl lg:px-8">
             <h2 className="sr-only">Productsss</h2>
-            <div>
+            <div className="w-full lg:w-64 lg:flex-shrink-0 mb-8 lg:mb-0">
               <SideFilter
                 onClick={filterClick}
                 activeCategory={activeCategory}
               />
             </div>
             {/* for searching */}
-            <div className="grid grid-cols-1 gap-x-6 gap-y-15 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            <div className="flex-1 grid grid-cols-1 gap-x-6 gap-y-15 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               <Outlet context={{ products: displayProducts, cart }} />
             </div>
           </div>
