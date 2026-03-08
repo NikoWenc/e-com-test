@@ -29,7 +29,7 @@ export default function Cart() {
             Cart 🛒
           </h1>
           <div className="grid grid-cols-1 gap-8">
-            <Outlet context={{ cart }} />
+            <Outlet />
           </div>
         </div>
       </div>

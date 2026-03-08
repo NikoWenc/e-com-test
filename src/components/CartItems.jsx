@@ -1,9 +1,9 @@
-import { useOutletContext } from "react-router-dom";
+import { useContext } from "react";
 import { ItemsContext } from "../context/ItemsContext";
 import AddToCartBTN from "./AddToCartBTN";
 
 export default function CartItems() {
-  const { cart } = useOutletContext(ItemsContext);
+  const { cart } = useContext(ItemsContext);
 
   return (
     <div className="space-y-6">
