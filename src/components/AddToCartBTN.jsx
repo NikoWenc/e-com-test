@@ -1,123 +1,42 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ItemsContext } from "../context/ItemsContext";
 
 export default function AddToCartBTN({ product }) {
-  // add to cart button state
-  const [addToCartButtonState, setAddToCartButtonState] = useState(() => {
-    const getCart = localStorage.getItem("cart");
-    const savedCart = JSON.parse(getCart);
+  const { cart, dispatch } = useContext(ItemsContext);
 
-    if (savedCart.items) {
-      const initialValue = savedCart.items.find(
-        (items) => items.id == product.id,
-      );
-      return initialValue?.addedToCart || false;
-    }
-  });
+  // Find if the item is already in the cart and what its quantity is
+  const cartItem = cart.items.find((item) => item.id === product.id);
+  const isAddedToCart = cartItem ? cartItem.addedToCart : false;
+  const quantityAdded = cartItem ? cartItem.quantityAdded : 0;
 
-  // item quantity count
-  const [quantityCounter, setQuantityCounter] = useState(() => {
-    const getCart = localStorage.getItem("cart");
-    const savedCart = JSON.parse(getCart);
-
-    if (savedCart.items) {
-      const initialValue = savedCart.items.find(
-        (items) => items.id == product.id,
-      );
-      return initialValue?.quantityAdded || 0;
-    }
-  });
-
-  const { setCart } = useContext(ItemsContext);
-
-  // for the + / - quantity button
-  function changeQuantity(operator) {
-    const getCart = localStorage.getItem("cart");
-    const savedCart = JSON.parse(getCart);
-
-    // update quantity property
-    savedCart.items.map((items) => {
-      if (items.id == product.id) {
-        items.quantityAdded = items.quantityAdded + operator;
-      }
-    });
-
-    // update the cart items array
-    const updatedItemList = savedCart.items.filter((items) => {
-      if (items.id === product.id && items.quantityAdded <= 0) {
-        items.addedToCart = false;
-        setAddToCartButtonState(false);
-        return false;
-      }
-      return true;
-    });
-
-    // save new array for saving to storage
-    savedCart.items = updatedItemList;
-
-    return localStorage.setItem("cart", JSON.stringify(savedCart));
+  // Dispatch functions for the reducer
+  function handleAddToCart() {
+    dispatch({ type: "ADD_TO_CART", payload: product });
   }
 
-  // cart update
-  function updateCart(operator) {
-    setCart((prev) => {
-      const newCount = prev.cartNumber + operator;
-
-      const getCart = localStorage.getItem("cart");
-      const savedCart = JSON.parse(getCart);
-
-      savedCart.items.map((items) => {
-        if (items.id === product.id) setQuantityCounter(items.quantityAdded);
-      });
-
-      savedCart.cartNumber = newCount;
-      localStorage.setItem("cart", JSON.stringify(savedCart));
-
-      return {
-        ...prev,
-        items: savedCart.items,
-        cartNumber: newCount,
-      };
-    });
+  function handleIncrement() {
+    dispatch({ type: "INCREMENT", payload: product.id });
   }
 
-  // add to cart button
-  function addItemToCart() {
-    const getCart = localStorage.getItem("cart");
-    const savedCart = JSON.parse(getCart);
-
-    setAddToCartButtonState(true);
-
-    savedCart.items.push({
-      ...product,
-      addedToCart: true,
-      quantityAdded: 1,
-    });
-
-    localStorage.setItem("cart", JSON.stringify(savedCart));
+  function handleDecrement() {
+    dispatch({ type: "DECREMENT", payload: product.id });
   }
 
   return (
     <>
-      {addToCartButtonState ? (
+      {isAddedToCart ? (
         <div className="flex justify-center items-center gap-5 mt-2">
           <button
-            onClick={() => {
-              changeQuantity(-1);
-              updateCart(-1);
-            }}
+            onClick={handleDecrement}
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg transition-colors duration-200 shadow-md active:scale-95 text-1xl"
           >
             -
           </button>
           <div className="flex justify-center items-center">
-            {quantityCounter}
+            {quantityAdded}
           </div>
           <button
-            onClick={() => {
-              changeQuantity(1);
-              updateCart(1);
-            }}
+            onClick={handleIncrement}
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg transition-colors duration-200 shadow-md active:scale-95 text-1xl"
           >
             +
@@ -126,10 +45,7 @@ export default function AddToCartBTN({ product }) {
       ) : (
         <button
           className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg transition-colors duration-200 shadow-md active:scale-95 text-1xl mt-2"
-          onClick={() => {
-            addItemToCart();
-            updateCart(1);
-          }}
+          onClick={handleAddToCart}
         >
           Add to Cart
         </button>

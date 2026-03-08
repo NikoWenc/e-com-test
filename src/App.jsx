@@ -2,11 +2,14 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import FetchShopItems from "./components/FetchShopItems";
 import { ItemsContext } from "./context/ItemsContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
+import { cartReducer } from "./Reducer/cartReducer/CartReducer";
 
 export default function App() {
   const [products, setProducts] = useState();
-  const [cart, setCart] = useState(() => {
+
+  // Initializing state from localStorage
+  const initialCartState = (() => {
     const saved = localStorage.getItem("cart");
     const initialValue = JSON.parse(saved);
     return (
@@ -15,7 +18,9 @@ export default function App() {
         cartNumber: 0,
       }
     );
-  });
+  })();
+
+  const [cart, dispatch] = useReducer(cartReducer, initialCartState);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -41,7 +46,7 @@ export default function App() {
         products,
         setProducts,
         cart,
-        setCart,
+        dispatch,
       }}
     >
       <nav>
