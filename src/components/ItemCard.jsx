@@ -8,7 +8,7 @@ export default function ItemCard() {
     <>
       {products.map((product) => (
         <div key={product.id} className="shadow-md p-3">
-          <a className="group">
+          <div className="group">
             <img
               alt={"test Pic"}
               src={product.image}
@@ -22,7 +22,7 @@ export default function ItemCard() {
             </p>
             {/* buttons */}
             <AddToCartBTN product={product} />
-          </a>
+          </div>
         </div>
       ))}
     </>

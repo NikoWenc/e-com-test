@@ -6,6 +6,7 @@ import SideFilter from "../components/SideFilter";
 
 export default function Shop() {
   const { products, cart } = useContext(ItemsContext);
+  const isLoading = products ? false : true;
   const [activeCategory, setActiveCategory] = useState({
     products: [],
     prices: [],
@@ -49,7 +50,7 @@ export default function Shop() {
 
   return (
     <>
-      {!products ? (
+      {isLoading ? (
         <LoadingPage />
       ) : (
         <div className="bg-white">

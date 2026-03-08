@@ -1,6 +1,6 @@
-function FetchShopItems() {
+function fetchShopItems() {
   const items = fetch("https://fakestoreapi.com/products");
   return items;
 }
 
-export default FetchShopItems;
+export default fetchShopItems;
