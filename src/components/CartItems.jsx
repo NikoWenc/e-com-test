@@ -30,7 +30,7 @@ export default function CartItems() {
               {product.description}
             </p>
             <p className="mt-4 text-2xl font-bold text-gray-900">
-              ${product.price}
+              ${product.price * product.quantityAdded}
             </p>
           </div>
 
