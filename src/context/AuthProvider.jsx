@@ -1,19 +1,25 @@
 import { useState } from "react";
+import { AuthContext } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
+    const token = localStorage.getItem("token");
+    return token ? JSON.parse(token) : null;
   });
+  const navigate = useNavigate();
 
-  const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+  const login = (token) => {
+    setUser(token);
+    localStorage.setItem("token", JSON.stringify(token));
+    //make this navigate to home page after login
+    navigate("/");
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (

@@ -6,6 +6,8 @@ import Cart from "../pages/Cart";
 import ItemCard from "../components/ItemCard";
 import CartItems from "../components/CartItems";
 import SideFilter from "../components/SideFilter";
+import Login from "../pages/Login";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -13,31 +15,44 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        index: true,
-        element: <Home />,
+        path: "login",
+        element: <Login />,
       },
       {
-        path: "shop",
-        element: <Shop />,
+        element: <ProtectedRoute />,
         children: [
           {
             index: true,
-            element: <ItemCard />,
+            element: <Home />,
           },
-        ],
-      },
-      {
-        path: "cart",
-        element: <Cart />,
-        children: [
           {
-            index: true,
-            element: <CartItems />,
+            path: "login",
+            element: <Login />,
+          },
+          {
+            path: "shop",
+            element: <Shop />,
+            children: [
+              {
+                index: true,
+                element: <ItemCard />,
+              },
+            ],
+          },
+          {
+            path: "cart",
+            element: <Cart />,
+            children: [
+              {
+                index: true,
+                element: <CartItems />,
+              },
+            ],
+          },
+          {
+            element: <SideFilter />,
           },
         ],
-      },
-      {
-        element: <SideFilter />,
       },
     ],
   },

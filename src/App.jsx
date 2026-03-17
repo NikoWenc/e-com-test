@@ -4,7 +4,7 @@ import fetchShopItems from "./utils/fetchShopItems";
 import { ItemsContext } from "./context/ItemsContext";
 import { useEffect, useState, useReducer } from "react";
 import { cartReducer } from "./reducer/cartReducer";
-import { AuthContext } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthProvider";
 
 export default function App() {
   const [products, setProducts] = useState();
@@ -49,7 +49,7 @@ export default function App() {
   }, [cart]);
 
   return (
-    <AuthContext.Provider>
+    <AuthProvider>
       <ItemsContext.Provider
         value={{
           products,
@@ -65,6 +65,6 @@ export default function App() {
           <Outlet />
         </main>
       </ItemsContext.Provider>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }

@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ItemsContext } from "../context/ItemsContext";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Navbar() {
   const { cart } = useContext(ItemsContext);
+  const { user, logout } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const cartNumberStyle =
@@ -12,7 +14,11 @@ export default function Navbar() {
       : "absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-amber-300 text-[12px] font-bold text-black";
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-gray-500 shadow-md">
+    <nav
+      className={
+        !user ? "hidden" : "fixed top-0 z-50 w-full bg-gray-500 shadow-md"
+      }
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
@@ -43,6 +49,12 @@ export default function Navbar() {
               >
                 Cart
                 <span className={cartNumberStyle}>{cart.cartNumber}</span>
+              </Link>
+              <Link
+                to="logout"
+                className="relative text-xl text-white hover:text-yellow-500 transition-colors"
+              >
+                <button onClick={logout}>Logout</button>
               </Link>
             </div>
           </div>
@@ -118,6 +130,12 @@ export default function Navbar() {
             className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-500 hover:text-yellow-500"
           >
             Cart ({cart.cartNumber})
+          </Link>
+          <Link
+            to="logout"
+            className="relative text-xl text-white hover:text-yellow-500 transition-colors"
+          >
+            <button onClick={logout}>Logout</button>
           </Link>
         </div>
       </div>
