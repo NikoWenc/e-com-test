@@ -3,7 +3,8 @@ import Navbar from "./components/Navbar";
 import fetchShopItems from "./utils/fetchShopItems";
 import { ItemsContext } from "./context/ItemsContext";
 import { useEffect, useState, useReducer } from "react";
-import { cartReducer } from "./Reducer/cartReducer/CartReducer";
+import { cartReducer } from "./reducer/cartReducer";
+import { AuthContext } from "./context/AuthContext";
 
 export default function App() {
   const [products, setProducts] = useState();
@@ -48,20 +49,22 @@ export default function App() {
   }, [cart]);
 
   return (
-    <ItemsContext.Provider
-      value={{
-        products,
-        setProducts,
-        cart,
-        dispatch,
-      }}
-    >
-      <nav>
-        <Navbar />
-      </nav>
-      <main>
-        <Outlet />
-      </main>
-    </ItemsContext.Provider>
+    <AuthContext.Provider>
+      <ItemsContext.Provider
+        value={{
+          products,
+          setProducts,
+          cart,
+          dispatch,
+        }}
+      >
+        <nav>
+          <Navbar />
+        </nav>
+        <main>
+          <Outlet />
+        </main>
+      </ItemsContext.Provider>
+    </AuthContext.Provider>
   );
 }
