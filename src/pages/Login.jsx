@@ -1,35 +1,47 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import loginAuth from "../utils/loginAuth";
+import { useMutation } from "@tanstack/react-query";
+import loginLoader from "../assets/loginLoader.gif";
 
 function Login() {
   const { login } = useContext(AuthContext);
+  const [username, setUsername] = useState("mor_2314");
+  const [password, setPassword] = useState("83r5^_");
+
+  const loginMutation = useMutation({
+    mutationFn: loginAuth,
+    onSuccess: (token) => {
+      login(token);
+    },
+    onError: (err) => {
+      console.error("Login Error:", err.message);
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    async function checkAuth() {
-      try {
-        const req = await loginAuth("mor_2314", "83r5^_");
-        const token = await req.json();
-        if (token) {
-          login(token);
-        }
-      } catch (err) {
-        if (err.name === "AbortError") {
-          console.log("Auth check aborted");
-        } else {
-          console.error("Auth Check Error:", err.message);
-        }
-      }
-    }
-    checkAuth();
+    loginMutation.mutate({ username, password });
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
+      <div
+        className={
+          loginMutation.isPending
+            ? "w-screen h-screen flex justify-center items-center"
+            : "hidden"
+        }
+      >
+        <img src={loginLoader} alt="Loader.." />
+      </div>
       <form
         onSubmit={handleSubmit}
-        className="login-form flex flex-col gap-6 w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl"
+        className={
+          loginMutation.isPending
+            ? "hidden"
+            : "login-form flex flex-col gap-6 w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl"
+        }
       >
         {/* Header */}
         <div className="text-center mb-4">
@@ -47,6 +59,8 @@ function Login() {
           <input
             id="user"
             type="text"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
             placeholder="Enter your username"
             className="px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             required
@@ -64,6 +78,8 @@ function Login() {
           <input
             id="password"
             type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             placeholder="••••••••"
             className="px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             required
