@@ -1,18 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import loginAuth from "../utils/loginAuth";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
   const { login } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     async function checkAuth() {
       try {
-        const req = await loginAuth(username, password);
+        const req = await loginAuth("mor_2314", "83r5^_");
         const token = await req.json();
         if (token) {
           login(token);
@@ -45,7 +42,7 @@ function Login() {
         {/* Email Input */}
         <div className="flex flex-col gap-2">
           <label htmlFor="user" className="text-sm font-medium text-slate-700">
-            Username: (hint: mor_2314)
+            Username
           </label>
           <input
             id="user"
@@ -53,8 +50,6 @@ function Login() {
             placeholder="Enter your username"
             className="px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
 
@@ -64,7 +59,7 @@ function Login() {
             htmlFor="password"
             className="text-sm font-medium text-slate-700"
           >
-            Password: (hint: 83r5^_)
+            Password
           </label>
           <input
             id="password"
@@ -72,8 +67,6 @@ function Login() {
             placeholder="••••••••"
             className="px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
