@@ -1,12 +1,8 @@
+import axios from "axios";
+
 async function fetchShopItems() {
-  const response = await fetch("https://fakestoreapi.com/products");
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch products");
-  }
-
-  const items = await response.json();
-  return items;
+  const response = await axios.get("https://fakestoreapi.com/products");
+  return response.data;
 }
 
 export default fetchShopItems;

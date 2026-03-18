@@ -1,16 +1,11 @@
+import axios from "axios";
+
 async function loginAuth({ username, password }) {
-  const token = await fetch("https://fakestoreapi.com/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+  const response = await axios.post("https://fakestoreapi.com/auth/login", {
+    username,
+    password,
   });
-
-  if (!token.ok) {
-    throw new Error("Login failed");
-  }
-
-  const tokenData = await token.json();
-  return tokenData;
+  return response.data;
 }
 
 export default loginAuth;
