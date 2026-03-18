@@ -3,10 +3,23 @@ import { useContext, useState } from "react";
 import { ItemsContext } from "../context/ItemsContext";
 import LoadingPage from "../components/LoadingPage";
 import SideFilter from "../components/SideFilter";
+import { useQuery } from "@tanstack/react-query";
+import fetchShopItems from "../utils/fetchShopItems";
 
 export default function Shop() {
-  const { products, cart } = useContext(ItemsContext);
-  const isLoading = products ? false : true;
+  const { cart } = useContext(ItemsContext);
+
+  const {
+    data: products,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchShopItems,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+
   const [activeCategory, setActiveCategory] = useState({
     products: [],
     prices: [],
@@ -17,8 +30,8 @@ export default function Shop() {
 
   const displayProducts =
     !hasProductFilters && !hasPriceFilters
-      ? products
-      : products.filter((item) => {
+      ? products || []
+      : (products || []).filter((item) => {
           // Match product category if any are selected
           const matchesCategory = hasProductFilters
             ? activeCategory.products.includes(item.category)
@@ -48,27 +61,29 @@ export default function Shop() {
     });
   }
 
+  if (isError)
+    return (
+      <div className="text-center text-red-500 py-10">
+        Error: {error.message}
+      </div>
+    );
+
+  if (isLoading) return <LoadingPage />;
+
   return (
     <>
-      {isLoading ? (
-        <LoadingPage />
-      ) : (
-        <div className="bg-white">
-          <div className="flex flex-col lg:flex-row mx-auto max-w-2xl px-4 py-25 sm:px-6 sm:py-30 lg:max-w-7xl lg:px-8">
-            <h2 className="sr-only">Productsss</h2>
-            <div className="w-full lg:w-64 lg:shrink-0 mb-8 lg:mb-0">
-              <SideFilter
-                onClick={filterClick}
-                activeCategory={activeCategory}
-              />
-            </div>
-            {/* for searching */}
-            <div className="flex-1 grid grid-cols-1 gap-x-6 gap-y-15 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-              <Outlet context={{ products: displayProducts, cart }} />
-            </div>
+      <div className="bg-white">
+        <div className="flex flex-col lg:flex-row mx-auto max-w-2xl px-4 py-25 sm:px-6 sm:py-30 lg:max-w-7xl lg:px-8">
+          <h2 className="sr-only">Productsss</h2>
+          <div className="w-full lg:w-64 lg:shrink-0 mb-8 lg:mb-0">
+            <SideFilter onClick={filterClick} activeCategory={activeCategory} />
+          </div>
+          {/* for searching */}
+          <div className="flex-1 grid grid-cols-1 gap-x-6 gap-y-15 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            <Outlet context={{ products: displayProducts, cart }} />
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }
