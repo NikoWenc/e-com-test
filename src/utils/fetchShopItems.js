@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_FAKESTORE_PRODUCTS_API_URL;
+
 async function fetchShopItems() {
-  const response = await axios.get("https://fakestoreapi.com/products");
+  const response = await axios.get(API_URL);
   return response.data;
 }
 
