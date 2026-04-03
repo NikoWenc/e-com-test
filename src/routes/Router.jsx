@@ -8,6 +8,7 @@ import CartItems from "../components/CartItems";
 import SideFilter from "../components/SideFilter";
 import Login from "../pages/Login";
 import ProtectedRoute from "../components/ProtectedRoute";
+import UnderRepairPage from "../components/UnderRepairPage";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "maintenance",
+        element: <UnderRepairPage />,
       },
       {
         element: <ProtectedRoute />,
