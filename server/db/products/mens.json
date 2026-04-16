@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Black Jacket for everyday use",
+    "price": 109.99,
+    "description": "Your perfect black jacket for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+    "category": "men's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776186996/jacket-black_r7jqrp.jpg"
+  },
+  {
+    "title": "Blue shirt for everyday use",
+    "price": 19.92,
+    "description": "Your perfect blue shirt for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+    "category": "men's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356153/blue-shirt_iydbvt.jpg"
+  },
+  {
+    "title": "Dark Blue Jacket for everyday use",
+    "price": 23.55,
+    "description": "Your perfect dark blue jacket for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+    "category": "men's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356154/dark-blue-jacket_kgie20.webp"
+  },
+  {
+    "title": "Tracksuit set for everyday use",
+    "price": 119.99,
+    "description": "Track suit set for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+    "category": "men's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356154/Mens_BOSS_Green_FZ_Hoodie_Zone_Dark_Blue_Zip_Hoodie_amp_Pants_Zone_Tracksuit_Set_07ed82bd-5235-4e2a-8382-bf266d706d2a_1800x_pxze7t.webp"
+  }
+]

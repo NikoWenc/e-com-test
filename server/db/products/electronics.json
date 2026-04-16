@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Black headphones for music lovers",
+    "price": 12.99,
+    "description": "Black wireless headphones for music lovers. These headphones offer excellent sound quality and comfort for extended listening sessions.",
+    "category": "electronics",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776186998/electronics.jpg"
+  },
+  {
+    "title": "Dual monitor setup for productivity",
+    "price": 50.99,
+    "description": "A sleek and powerful dual monitor setup for productivity. With high-resolution displays and advanced features, it's perfect for staying connected and entertained on the go.",
+    "category": "electronics",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356214/dual-monitor_hauvrg.jpg"
+  },
+  {
+    "title": "Mini-Fan for personal cooling",
+    "price": 30.99,
+    "description": "A Mini-Fan for personal cooling. This compact and portable fan is perfect for keeping you cool during hot summer days or while working at your desk.",
+    "category": "electronics",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356215/mini-fan_ophxxv.webp"
+  },
+  {
+    "title": "Monitor Handle for ergonomic setup",
+    "price": 199.99,
+    "description": "A stylish monitor handle for ergonomic setup. This convenient accessory helps you adjust your monitor to the perfect height and angle for comfortable viewing.",
+    "category": "electronics",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356217/monitor-handle_wlmlbf.jpg"
+  }
+]

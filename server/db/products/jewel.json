@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Gold bracelet for special occasions",
+    "price": 222.3,
+    "description": "Gold bracelet for special occasions. This elegant piece of jewelry is perfect for adding a touch of sophistication to any outfit.",
+    "category": "jewelery",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776186996/jewellery_ncg0m4.jpg"
+  },
+  {
+    "title": "Green Ring for special occasions",
+    "price": 329.99,
+    "description": "Elegant green ring for special occasions. This timeless piece is perfect for adding a touch of sophistication to any outfit.",
+    "category": "jewelery",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356285/green-ring_xupkxn.webp"
+  },
+  {
+    "title": "Gold Necklace set for special occasions",
+    "price": 1449.99,
+    "description": "Elegant gold necklace set for special occasions. This timeless piece is perfect for adding a touch of sophistication to any outfit.",
+    "category": "jewelery",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356286/necklace-set_gvijrv.jpg"
+  },
+  {
+    "title": "Green gem necklace for special occasions",
+    "price": 522.3,
+    "description": "Elegant green gem necklace for special occasions. This timeless piece is perfect for adding a touch of sophistication to any outfit.",
+    "category": "jewelery",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356374/green-gem_bingmb.jpg"
+  }
+]

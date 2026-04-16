@@ -1,0 +1,30 @@
+[
+  {
+    "title": "white T-shirt for everyday use",
+    "price": 22.3,
+    "description": "White plain see-through mesh T-shirt. The color could be slightly different between on the screen and in practice. Due to the different display and lighting effects, the actual color of the item might be slightly different from the pictures.",
+    "category": "women's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776186997/women-jacket_enqdlo.jpg"
+  },
+  {
+    "title": "Black dress for special occasions",
+    "price": 129.99,
+    "description": "Elegant black dress for special occasions. This timeless piece is perfect for adding a touch of sophistication to any outfit.",
+    "category": "women's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356188/Black-dress_rxbnc4.jpg"
+  },
+  {
+    "title": "Blue and white dress for special occasions",
+    "price": 149.99,
+    "description": "Elegant blue and white dress for special occasions. This timeless piece is perfect for adding a touch of sophistication to any outfit.",
+    "category": "women's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356195/blue-white-dress_cntuh0.jpg"
+  },
+  {
+    "title": "Gray jacket for everyday use",
+    "price": 22.3,
+    "description": "Gray jacket for everyday use. This versatile piece is perfect for adding a touch of sophistication to any outfit.",
+    "category": "women's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776356196/gray-jacket_n8momx.jpg"
+  }
+]
