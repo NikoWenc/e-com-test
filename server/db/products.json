@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Black Jacket for everyday use",
+    "price": 109.92,
+    "description": "Your perfect black jacket for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+    "category": "men's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776186996/jacket-black_r7jqrp.jpg"
+  },
+  {
+    "title": "white T-shirt for everyday use",
+    "price": 22.3,
+    "description": "White plain see-through mesh T-shirt. The color could be slightly different between on the screen and in practice. Due to the different display and lighting effects, the actual color of the item might be slightly different from the pictures.",
+    "category": "women's clothing",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776186997/women-jacket_enqdlo.jpg"
+  },
+  {
+    "title": "Black headphones for music lovers",
+    "price": 12.99,
+    "description": "Black wireless headphones for music lovers. These headphones offer excellent sound quality and comfort for extended listening sessions.",
+    "category": "electronics",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776186998/electronics.jpg"
+  },
+  {
+    "title": "Gold bracelet for special occasions",
+    "price": 222.3,
+    "description": "Gold bracelet for special occasions. This elegant piece of jewelry is perfect for adding a touch of sophistication to any outfit.",
+    "category": "jewelery",
+    "image": "https://res.cloudinary.com/dksqqmlw8/image/upload/v1776186996/jewellery_ncg0m4.jpg"
+  }
+]
