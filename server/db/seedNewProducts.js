@@ -30,7 +30,7 @@ async function main() {
     for (const product of products) {
       const { title, price, description, category, image } = product;
       await pool.query(
-        "INSERT INTO products (title, price, description, category, image) VALUES ($1, $2, $3, $4, $5)",
+        "INSERT INTO products (title, price, description, category, image) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (title) DO UPDATE SET price = EXCLUDED.price, description = EXCLUDED.description, category = EXCLUDED.category, image = EXCLUDED.image",
         [title, price, description, category, image],
       );
     }
